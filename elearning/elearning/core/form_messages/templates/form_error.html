@@ -1,0 +1,11 @@
+{% if errors %}
+    <div class="div-error">
+        <ul>
+            {% for error in errors %}
+                <li>
+                    <span class="error-detail">{{ error|escape }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
