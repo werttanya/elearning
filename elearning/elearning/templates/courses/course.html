@@ -1,0 +1,34 @@
+{% extends "main/base.html" %}
+{% block title %}
+   {{course.name}}
+{% endblock %}
+
+{% block content %}
+<div class="container margin-top-30">
+    <div class="row">
+        <div class="col-md-9 col-sm-8">
+            <h2 class="underline-title no-margin-top">{{ course.name }}</h2>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane active" id="organizer-navs">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#course-description"data-toggle="tab">Course Description</a>
+                            </li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content padding-15">
+                            <div class="tab-pane active" id="course-description">
+                                {% load md2 %}
+                                {{ course.description|markdown:"safe" }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <input class="input" type="button" onclick="location.href='{% url "add_quiz" course.id%}'" value="Create quiz"/>
+</div>
+{% endblock %}

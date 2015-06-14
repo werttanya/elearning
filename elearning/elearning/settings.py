@@ -40,6 +40,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'elearning.core.users',
     'elearning.core.form_messages',
+    'elearning.core.courses',
+    'django_markdown2',
 )
 
 MIDDLEWARE_CLASSES = (

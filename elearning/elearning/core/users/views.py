@@ -2,6 +2,7 @@ import requests
 from .forms import RegistrationForm
 from django.shortcuts import redirect, render
 from elearning.settings import REST_API
+from django.http import HttpResponseBadRequest
 
 def register(request):
     if request.method == 'POST':
@@ -15,8 +16,12 @@ def register(request):
             url = '/users'
             r = requests.post(REST_API+url, data=params)
             if r.status_code == requests.codes.created:
-                render(request, 'users/register.html', {'form': form,})
+                request.session["email"] = email
+                request.session["password"] = password
+                courses_url = '/courses/'
+                return redirect(courses_url)
+            else:
+                return HttpResponseBadRequest()
     else:
         form = RegistrationForm()
-        return render(request, 'users/register.html', {'form': form,})
-
+    return render(request, 'users/register.html', {'form': form,})

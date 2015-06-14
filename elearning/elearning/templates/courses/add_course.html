@@ -1,0 +1,49 @@
+{% extends "main/base.html" %}
+
+{% block title %}New course{% endblock %}
+{% block content %}
+    <div class="container">
+        <h2 class="section-title">Create new course</h2>
+        <div class="row">
+            <div class="col-md-7">
+                <div class="panel panel-primary animated fadeInDown">
+                    <div class="panel-heading">Course Form</div>
+                    <div class="panel-body">
+                        <form method="post"  action="" class="wide" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {% load error_message %}
+                            {% for field in form.visible_fields %}
+                                <div class="form-group">
+                                    <label class="label">
+                                        {{field.label_tag}}
+                                        {% if field.field.required %}
+                                            <span class="ast_required">*</span>
+                                        {% endif %}
+                                    </label>
+                                        <input type="text" class="form-control" id="{{ field.name }}" name="{{ field.name }}">
+                                </div>
+                            {% endfor %}
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-primary pull-right" value="Create" name="Create">Create</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="panel-errors panel animated fadeInDown">
+                    {% if form.errors %}
+                        <p class="errors">Please correct the errors below:
+                            <div class="div-error">{{ form.non_field_errors }}</div>
+                        </p>
+                    {% endif %}
+                    {% for field in form.visible_fields %}
+                        {% show_single_error field.errors %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
