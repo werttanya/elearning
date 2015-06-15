@@ -1,8 +1,16 @@
 import requests
-from .forms import RegistrationForm
+from .forms import RegistrationForm, LoginForm
 from django.shortcuts import redirect, render
 from elearning.settings import REST_API
-from django.http import HttpResponseBadRequest
+from django.http import HttpResponseBadRequest, HttpResponseRedirect
+from django.core.urlresolvers import reverse
+
+def user_login_required(request, *args, **kwargs):
+    # this check the session if email and password exist,
+    # if not it will redirect to login page
+    if 'email' not in request.session.keys() or 'password' not in request.session.keys():
+        return HttpResponseRedirect(reverse("login"))
+    return True
 
 def register(request):
     if request.method == 'POST':
@@ -25,3 +33,12 @@ def register(request):
     else:
         form = RegistrationForm()
     return render(request, 'users/register.html', {'form': form,})
+
+def login(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            pass
+    else:
+        form = LoginForm()
+    return render(request, 'users/login.html', {'form': form,})

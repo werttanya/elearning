@@ -57,3 +57,10 @@ class RegistrationForm(SiteForm):
             if self.cleaned_data['password1'] != self.cleaned_data['password2']:
                 raise forms.ValidationError(u'You must type the same password each time')
         return self.cleaned_data
+
+class LoginForm(SiteForm):
+    email = forms.EmailField(widget=forms.TextInput(attrs=dict(attrsdict,
+                                                               maxlength=75)),
+                             label=u'email address')
+    password1 = forms.CharField(widget=forms.PasswordInput(attrs=attrsdict, render_value=False),
+                                label=u'password')

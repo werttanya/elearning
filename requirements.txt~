@@ -1,4 +1,4 @@
-Collecting requests
-  Downloading requests-2.7.0-py2.py3-none-any.whl (470kB)
-Installing collected packages: requests
-Successfully installed requests-2.7.0
+Django==1.8
+django-templates-macros==0.1
+requests==2.7.0
+wheel==0.24.0
