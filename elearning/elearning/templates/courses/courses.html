@@ -32,6 +32,10 @@
                         </section>
                     </div>
                 {% endfor %}
+                <div class="col-md-12">
+                    <input type="button" onclick="location.href='{% url "add_course" %}'" value="Create course"
+                           class="btn btn-primary"/>
+                </div>
             </div>
             {% if paginator %}
                 <div class="text-center">
@@ -61,5 +65,4 @@
             {% endif %}
         </div>
     {% endif %}
-    <input class="input" type="button" onclick="location.href='{% url "add_course"%}'" value="Create course"/>
 {% endblock %}

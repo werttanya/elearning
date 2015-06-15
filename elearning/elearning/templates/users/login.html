@@ -1,0 +1,36 @@
+{% extends "main/base.html" %}
+
+{% block title %}Login{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="page-header">
+                <div class="clearfix">
+                    <div class="col-md-12">
+                        <h2>Login</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h1 class="panel-title">Sign in</h1>
+                    </div>
+                    <div class="panel-body">
+                        <form role="form" method="post" id="loginform">
+                            <div class="form-group">
+                                <input class="form-control" placeholder="E-mail" name="email" autofocus=""
+                                       type="email"
+                                       required="true">
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Password" name="password" value=""
+                                       type="password" required="true">
+                            </div>
+                            <button type="submit" class="btn btn-primary pull-right">Login</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

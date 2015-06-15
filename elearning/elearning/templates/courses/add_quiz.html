@@ -1,7 +1,51 @@
 {% extends "main/base.html" %}
+
 {% block title %}
-   New quiz
+    New Quiz
 {% endblock %}
 
 {% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="page-header">
+                <div class="clearfix">
+                    <div class="col-md-12">
+                        <h2>Create a new quiz</h2>
+                    </div>
+                </div>
+            </div>
+            <form role="form" method="post" id="newQuizForm" action="/penis">
+                <div class="col-md-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h1 class="panel-title">Quiz details</h1>
+                        </div>
+                        <div class="panel-body">
+                            <div id="questionAnswer1" class="col-md-12" style="padding-bottom: 20px">
+                                <div class="form-group" name="penis">
+                                    <input class="form-control" placeholder="Question" name="question1" id="question1"
+                                           type="text" required="true">
+                                </div>
+                                <div id="question1Answers" class="col-md-10 pull-right">
+                                    <div class="form-group" id="question1Answer1">
+                                        <input class="form-control" placeholder="Answer" name="answer1" value=""
+                                               type="text" required="true">
+                                    </div>
+                                    <input type="button" class="btn btn-primary pull-right" id="addAnswerBtn"
+                                           value="Add answer"/>
+                                </div>
+                            </div>
+                            <input type="button" class="btn btn-primary pull-left" id="addQuestionBtn"
+                                   value="Add question"/>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-12">
+                    <button class="btn btn-info" type="submit">Create quiz</button>
+                </div>
+            </form>
+        </div>
+    </div>
 {% endblock %}
+
