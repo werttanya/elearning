@@ -16,6 +16,7 @@
             </div>
             <form role="form" method="post" id="newQuizForm" action="" class="wide" enctype="multipart/form-data">
                 {% csrf_token %}
+                <input name="numberOfQuestions" type="hidden" value="1" id="numberOfQuestions"/>
                 <div class="col-md-6">
                     <div class="panel panel-primary">
                         <div class="panel-heading">

@@ -21,7 +21,9 @@ jQuery(function ($) {
         var firstChild = $(tempQuestion).find("#question1");
         var secondChild = tempQuestion.children("#question1Answers");
         var questionNumber = $(parent).children().length;
+        var questionsTotal = parseInt($("#numberOfQuestions").val());
 
+        $("#numberOfQuestions").val(questionsTotal + 1);
         tempQuestion.attr("id", "questionAnswer" + questionNumber);
         firstChild.attr("name", "question" + questionNumber);
         firstChild.attr("id", "question" + questionNumber);
