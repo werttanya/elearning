@@ -14,8 +14,6 @@ jQuery(function ($) {
         nextAnswer.attr("id", question + "Answer" + answerNumber);
         $(nextAnswer).children(":input").attr("placeholder", "Answer " + answerNumber).attr("name", question + "answer" + answerNumber).attr("require", "true").val("");
         $(e.target).before(nextAnswer);
-
-        console.log("penis");
     });
     $("#addQuestionBtn").click(function (e) {
         var parent = $(e.target).parent();
@@ -31,7 +29,7 @@ jQuery(function ($) {
         secondChild.attr("id", "question" + questionNumber + "Answers");
         secondChild.children("#question1Answer1").attr("id", "question" + questionNumber + "Answer1").attr("require", "true");
         secondChild.children().find(":input").attr("name", "question" + questionNumber + "Answer1");
-        console.log(secondChild.children(":first").children(":first"));
+
         $(e.target).before(tempQuestion);
     });
 });
