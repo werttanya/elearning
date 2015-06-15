@@ -12,7 +12,7 @@ jQuery(function ($) {
         var question = $(parent).attr("id").slice(0, 9);
         var answerNumber = $(parent).children().length;
         nextAnswer.attr("id", question + "Answer" + answerNumber);
-        $(nextAnswer).children(":input").attr("placeholder", "Answer " + answerNumber).attr("name", "answer" + answerNumber).attr("require", "true").val("");
+        $(nextAnswer).children(":input").attr("placeholder", "Answer " + answerNumber).attr("name", question + "answer" + answerNumber).attr("require", "true").val("");
         $(e.target).before(nextAnswer);
 
         console.log("penis");
