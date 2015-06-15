@@ -80,4 +80,7 @@ def course_page(request, course_id):
                   {'course': course,})
 
 def add_quiz(request, course_id):
+    if request.method == 'POST':
+        pass
+
     return render(request, 'courses/add_quiz.html')

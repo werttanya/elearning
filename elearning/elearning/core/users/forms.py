@@ -1,5 +1,8 @@
 import re
 from django import forms
+from django.forms.util import ErrorList, ErrorDict
+from django.forms.forms import NON_FIELD_ERRORS
+
 attrsdict = {'class': 'required'}
 alnum_re = re.compile(r'^\w+$')
 
@@ -62,5 +65,18 @@ class LoginForm(SiteForm):
     email = forms.EmailField(widget=forms.TextInput(attrs=dict(attrsdict,
                                                                maxlength=75)),
                              label=u'email address')
-    password1 = forms.CharField(widget=forms.PasswordInput(attrs=attrsdict, render_value=False),
+    password = forms.CharField(widget=forms.PasswordInput(attrs=attrsdict, render_value=False),
                                 label=u'password')
+
+'''
+adding error to form field with name fieldname
+or to non-field errors when fieldname is None
+'''
+def add_form_error(form, fieldname, error_msg):
+    if not form._errors:
+        form._errors = ErrorDict()
+    if fieldname:
+        errors = form._errors.setdefault(fieldname, ErrorList())
+    else:
+        errors = form._errors.setdefault(NON_FIELD_ERRORS, form.error_class())
+    errors.append(error_msg)

@@ -4,10 +4,10 @@
 {% endblock %}
 
 {% block content %}
-    {% if not courses %}
-        <h4>Sorry, there are no courses yet. Create a new one!</h4>
-    {% else %}
         <div class="container">
+        {% if not courses %}
+        <h4>Sorry, there are no courses yet. Create a new one!</h4>
+        {% else %}
             <div class="row">
                 {% for course in courses %}
                     <div class="col-md-6">
@@ -59,7 +59,10 @@
                     </ul>
                 </div>
             {% endif %}
+        {% endif %}
+        <div class="col-md-12">
+                    <input type="button" onclick="location.href='{% url "add_course" %}'" value="Create course"
+                           class="btn btn-primary"/>
         </div>
-    {% endif %}
-    <input class="input" type="button" onclick="location.href='{% url "add_course"%}'" value="Create course"/>
+        </div>
 {% endblock %}
