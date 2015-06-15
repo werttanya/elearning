@@ -84,6 +84,12 @@ def course_page(request, course_id):
 
 def add_quiz(request, course_id):
     if request.method == 'POST':
-        pass
-
+        question_num = request.POST["numberOfQuestions"]
+        title = request.POST["title"]
+        description = request.POST["description"]
+        questions = []
+        for i in range(int(question_num)):
+            question = request.POST['question{0}'.format(i+1)]
+            answers = [value for key, value in request.POST.iteritems() if key.lower().startswith('question{0}answer'.format(i+1))]
+            questions.append({"text":question, "answers":answers})
     return render(request, 'courses/add_quiz.html')

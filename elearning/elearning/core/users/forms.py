@@ -1,6 +1,6 @@
 import re
 from django import forms
-from django.forms.util import ErrorList, ErrorDict
+from django.forms.utils import ErrorList, ErrorDict
 from django.forms.forms import NON_FIELD_ERRORS
 
 attrsdict = {'class': 'required'}
