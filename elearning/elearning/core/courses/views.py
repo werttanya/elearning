@@ -6,7 +6,9 @@ from django.shortcuts import redirect, render
 from elearning.settings import REST_API
 from django.http import HttpResponseBadRequest
 from .forms import CourseForm
+import logging
 
+logger = logging.getLogger()
 def json_object_hook(response):
     """
     Convert JSON representation of response to object one.
@@ -52,6 +54,7 @@ def courses(request):
 def add_course(request):
     if request.method == 'POST':
         form = CourseForm(request.POST)
+        logger.warning(request.POST)
         if form.is_valid():
             title = form.cleaned_data['title']
             description = form.cleaned_data['description']

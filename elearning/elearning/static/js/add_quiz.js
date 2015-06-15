@@ -26,9 +26,12 @@ jQuery(function ($) {
 
         tempQuestion.attr("id", "questionAnswer" + questionNumber);
         firstChild.attr("name", "question" + questionNumber);
+        firstChild.attr("id", "question" + questionNumber);
+
         secondChild.attr("id", "question" + questionNumber + "Answers");
         secondChild.children("#question1Answer1").attr("id", "question" + questionNumber + "Answer1").attr("require", "true");
-
+        secondChild.children().find(":input").attr("name", "question" + questionNumber + "Answer1");
+        console.log(secondChild.children(":first").children(":first"));
         $(e.target).before(tempQuestion);
     });
 });
