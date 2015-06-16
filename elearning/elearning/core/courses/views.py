@@ -5,8 +5,10 @@ from collections import namedtuple
 from django.shortcuts import redirect, render
 from elearning.settings import REST_API
 from django.http import HttpResponseBadRequest
+from django.core.urlresolvers import reverse
 from .forms import CourseForm
 import logging
+import json
 
 logger = logging.getLogger()
 def json_object_hook(response):
@@ -83,14 +85,26 @@ def course_page(request, course_id):
                   {'course': course,})
 
 def add_quiz(request, course_id):
+    email = request.session['email']
+    password = request.session['password']
     if request.method == 'POST':
         question_num = request.POST["numberOfQuestions"]
         title = request.POST["title"]
         description = request.POST["description"]
         questions = []
+        url = '/quizzes'
         for i in range(int(question_num)):
             question = request.POST['question{0}'.format(i+1)]
-            answers = [value for key, value in request.POST.iteritems() if key.lower().startswith('question{0}answer'.format(i+1))]
-            correctAnswerIndex = request.POST['question{0}AnswerTrue'.format(i+1)]
-            questions.append({"text":question, "answers":answers})
+            answers = [value for key, value in request.POST.iteritems()
+                       if (key.lower().startswith('question{0}answer'.format(i+1))
+                           and key != 'question{0}AnswersTrue'.format(i+1))]
+            correctAnswerIndex = request.POST['question{0}AnswersTrue'.format(i+1)]
+            questions.append({"text":question, "answers":answers, "correctAnswerIndex":correctAnswerIndex})
+        quiz = {"title": title, "description": description, "course_id": course_id, "questions": questions}
+        r = requests.post(REST_API+url, data=json.dumps(quiz), headers={'content-type': 'application/json'},
+                          auth=(email, password))
+        if r.status_code == requests.codes.created:
+            return redirect(reverse('course_page', args=[course_id]))
+        else:
+            return HttpResponseBadRequest()
     return render(request, 'courses/add_quiz.html')

@@ -13,7 +13,7 @@ jQuery(function ($) {
 
         nextAnswer.attr("id", question + "Answer" + answerNumber);
         $(nextAnswer).find(":input:text").attr("placeholder", "Answer " + answerNumber).attr("name", question + "answer" + answerNumber).attr("require", "true").val("");
-        $(nextAnswer).find(":input:radio").val(question + "answer" + answerNumber);
+        $(nextAnswer).find(":input:radio").val(answerNumber).prop('checked', false);
 
         $(e.target).before(nextAnswer);
     });
@@ -34,7 +34,7 @@ jQuery(function ($) {
         secondChild.attr("id", "question" + questionNumber + "Answers");
         secondChild.children("#question1Answer1").attr("id", "question" + questionNumber + "Answer1").attr("require", "true");
         secondChild.children().find(":input:text").attr("name", "question" + questionNumber + "Answer1");
-        secondChild.children().find(":input:radio").attr("name", "question" + questionNumber + "AnswersTrue").val("question" + questionNumber + "Answer1");
+        secondChild.children().find(":input:radio").attr("name", "question" + questionNumber + "AnswersTrue");
 
         $(e.target).before(tempQuestion);
     });
