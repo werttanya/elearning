@@ -34,7 +34,7 @@ jQuery(function ($) {
         secondChild.attr("id", "question" + questionNumber + "Answers");
         secondChild.children("#question1Answer1").attr("id", "question" + questionNumber + "Answer1").attr("require", "true");
         secondChild.children().find(":input:text").attr("name", "question" + questionNumber + "Answer1");
-        secondChild.children().find(":input:radio").attr("name", "question" + questionNumber + "AnswersTrue");
+        secondChild.children().find(":input:radio").attr("name", "question" + questionNumber + "AnswersTrue").val("question" + questionNumber + "Answer1");
 
         $(e.target).before(tempQuestion);
     });
