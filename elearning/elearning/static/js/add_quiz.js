@@ -23,7 +23,7 @@ jQuery(function ($) {
         var tempQuestion = $(originalQuestionAnswer).clone();
         var firstChild = $(tempQuestion).find("#question1");
         var secondChild = tempQuestion.children("#question1Answers");
-        var questionNumber = $(parent).children().length;
+        var questionNumber = $(parent).children().length - 2;
         var questionsTotal = parseInt($("#numberOfQuestions").val());
 
         $("#numberOfQuestions").val(questionsTotal + 1);
