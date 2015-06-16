@@ -91,5 +91,6 @@ def add_quiz(request, course_id):
         for i in range(int(question_num)):
             question = request.POST['question{0}'.format(i+1)]
             answers = [value for key, value in request.POST.iteritems() if key.lower().startswith('question{0}answer'.format(i+1))]
+            correctAnswerIndex = request.POST['question{0}AnswerTrue'.format(i+1)]
             questions.append({"text":question, "answers":answers})
     return render(request, 'courses/add_quiz.html')
