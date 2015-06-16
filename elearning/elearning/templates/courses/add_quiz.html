@@ -17,6 +17,7 @@
             <form role="form" method="post" id="newQuizForm" action="" class="wide" enctype="multipart/form-data">
                 {% csrf_token %}
                 <input name="numberOfQuestions" type="hidden" value="1" id="numberOfQuestions"/>
+
                 <div class="col-md-6">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
@@ -29,10 +30,17 @@
                                            type="text" required="true">
                                 </div>
                                 <div id="question1Answers" class="col-md-10 pull-right">
-                                    <div class="form-group" id="question1Answer1">
-                                        <input class="form-control" placeholder="Answer" name="question1Answer1"
-                                               value=""
-                                               type="text" required="true">
+                                    <div class="row" id="question1Answer1">
+                                        <div class=" col-md-1 form-group">
+                                            <input type="radio" name="question1AnswersTrue" class="radio-inline"
+                                                   style="height: 25px; width: 25px" value="question1Answer1"/>
+                                        </div>
+
+                                        <div class="col-md-11 form-group">
+                                            <input class="form-control" placeholder="Answer" name="question1Answer1"
+                                                   value=""
+                                                   type="text" required="true">
+                                        </div>
                                     </div>
                                     <input type="button" class="btn btn-primary pull-right" id="addAnswerBtn"
                                            value="Add answer"/>
