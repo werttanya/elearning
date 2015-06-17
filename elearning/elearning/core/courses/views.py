@@ -112,5 +112,16 @@ def add_quiz(request, course_id):
             return HttpResponseBadRequest()
     return render(request, 'courses/add_quiz.html')
 
-def publish_quiz(request, quiz_id):
-    pass
+def publish_quiz(request, course_id, quiz_id):
+    email = request.session['email']
+    password = request.session['password']
+    url ='/quizzes/{0}/publish'.format(quiz_id)
+    if request.method == 'POST':
+        text = request.POST["text"]
+        r = requests.post(REST_API+url, data={'text': text})
+        if r.status_code == requests.codes.ok:
+            return redirect(reverse('course_page', args=[course_id]))
+        else:
+            return HttpResponseBadRequest()
+    return HttpResponseBadRequest()
+

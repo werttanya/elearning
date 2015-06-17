@@ -39,11 +39,15 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="#">Home</a></li>
+              <li class="active"><a href="/courses/">Home</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Login</a></li>
-              <li><a href="#">Register</a></li>
+                {% if not request.session.email %}
+                <li><a href="/user/login/">Login</a></li>
+              <li><a href="/user/register/">Register</a></li>
+                {% else %}
+                    <li><a href="/user/logout/">Logout</a></li>
+                {% endif %}
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->

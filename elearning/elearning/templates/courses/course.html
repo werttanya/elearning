@@ -55,7 +55,7 @@
                                         {% else %}
                                         <input class="btn btn-primary" value="Submit" type="button" id="submitBtn"
                                                data-toggle="modal" data-target="#confirm-submit"
-                                               onclick="location.href='{% url "publish_quiz" quiz.id %}'"
+                                               onclick="location.href='{% url "publish_quiz" course.id quiz.id %}'"
                                         value="Publish quiz"/>
                                         {% endif %}
                                     </td>
