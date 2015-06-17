@@ -36,36 +36,38 @@
                                 {{ course.description|markdown:"safe" }}
                             </div>
                             <div class="tab-pane" id="course-quizzes">
-                            {% if quizzes %}
+                                {% if quizzes %}
 
-                                <table data-toggle="table" class="table table-bordered" style="width: 70%">
-                                <thead>
-                                <tr>
-                                    <th>Title</th>
-                                    <th>Description</th>
-                                    <th>Published</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {% for quiz in quizzes %}
-                                    <tr {% if quiz.published %} class="success" {% else %}class="warning"{% endif %}>
-                                    <td>{{ quiz.title }}</td>
-                                    <td>{{ quiz.description }}</td>
-                                    <td>{% if quiz.published %}{{ quiz.date_published }}
-                                        {% else %}
-                                        <input class="btn btn-primary" value="Submit" type="button" id="submitBtn"
-                                               data-toggle="modal" data-target="#confirm-submit"
-                                               onclick="location.href='{% url "publish_quiz" quiz.id %}'"
-                                        value="Publish quiz"/>
-                                        {% endif %}
-                                    </td>
-                                    </tr>
-                                {% endfor %}
-                                </tbody>
-                                </table>
-                            {% else %}
-                                <h4>There are no quizzes yet. Create a new one!</h4>
-                            {% endif %}
+                                    <table data-toggle="table" class="table table-bordered" style="width: 70%">
+                                        <thead>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Description</th>
+                                            <th>Published</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for quiz in quizzes %}
+                                            <tr {% if quiz.published %} class="success"
+                                                                        {% else %}class="warning"{% endif %}>
+                                                <td>{{ quiz.title }}</td>
+                                                <td>{{ quiz.description }}</td>
+                                                <td>{% if quiz.published %}{{ quiz.date_published }}
+                                                {% else %}
+                                                    <button class="btn btn-primary"
+                                                            value="{% url "publish_quiz" quiz.id %}"
+                                                            id="submitBtn"
+                                                            data-toggle="modal" data-target="#confirm-submit">Submit
+                                                    </button>
+                                                {% endif %}
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                {% else %}
+                                    <h4>There are no quizzes yet. Create a new one!</h4>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -74,7 +76,28 @@
             <div class="col-md-12">
                 <input class="btn btn-primary" type="button" onclick="location.href='{% url "add_quiz" course.id %}'"
                        value="Create quiz"/>
+            </div>
+        </div>
+    </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="confirm-submit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Submit quiz</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="courseFormPublishModal">
+                        <input type="text" class="form-control" name="text"/>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="saveCourseChanges">Save changes</button>
+                </div>
             </div>
         </div>
     </div>
