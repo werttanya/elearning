@@ -104,6 +104,10 @@
     padding: 15px;
 }
 
+.padding-5{
+    padding: 5px;
+}
+
 .margin-top-30 {
     margin-top: 30px;
 }
@@ -560,4 +564,8 @@ header p {
 
 #components .content {
     padding-bottom: 20px;
+}
+
+td, th {
+    padding: 5px;
 }

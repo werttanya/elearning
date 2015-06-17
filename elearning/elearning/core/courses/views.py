@@ -81,8 +81,11 @@ def course_page(request, course_id):
     password = request.session['password']
     r = requests.get(REST_API+url, headers=accept_json_header, auth=(email, password))
     course = r.json(object_hook=json_object_hook)
+    quizzes_url = '/quizzes?course_id={0}'.format(course_id)
+    qr = requests.get(REST_API+quizzes_url, headers=accept_json_header, auth=(email, password))
+    quizzes = qr.json(object_hook=json_object_hook)
     return render(request, 'courses/course.html',
-                  {'course': course,})
+                  {'course': course,'quizzes': quizzes})
 
 def add_quiz(request, course_id):
     email = request.session['email']
@@ -108,3 +111,6 @@ def add_quiz(request, course_id):
         else:
             return HttpResponseBadRequest()
     return render(request, 'courses/add_quiz.html')
+
+def publish_quiz(request, quiz_id):
+    pass

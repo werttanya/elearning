@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url
 
-from .views import (courses, add_course, course_page, add_quiz)
+from .views import (courses, add_course, course_page, add_quiz, publish_quiz)
 from elearning.core.users.views import user_login_required
 
 urlpatterns = patterns('',
@@ -12,5 +12,7 @@ urlpatterns = patterns('',
         user_login_required(course_page), name='course_page'),
     url(r'^courses/(?P<course_id>\w+)/quizzes/add/$',
         user_login_required(add_quiz), name='add_quiz'),
+    url(r'^courses/quizzes/(?P<quiz_id>\w+)/publish/$',
+        user_login_required(publish_quiz), name='publish_quiz'),
 
 )
