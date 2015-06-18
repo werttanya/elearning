@@ -118,7 +118,7 @@ def publish_quiz(request, course_id, quiz_id):
     url ='/quizzes/{0}/publish'.format(quiz_id)
     if request.method == 'POST':
         text = request.POST["text"]
-        r = requests.post(REST_API+url, data={'text': text})
+        r = requests.post(REST_API + url, data={'text': text}, auth=(email, password))
         if r.status_code == requests.codes.ok:
             return redirect(reverse('course_page', args=[course_id]))
         else:
