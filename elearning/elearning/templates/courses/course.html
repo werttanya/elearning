@@ -48,11 +48,11 @@
                                         <tbody>
                                         {% for quiz in quizzes %}
                                             {% csrf_token %}
-                                            <tr {% if quiz.published %} class="success"
+                                            <tr {% if quiz.date_published %} class="success"
                                                                         {% else %}class="warning"{% endif %}>
                                                 <td>{{ quiz.title }}</td>
                                                 <td>{{ quiz.description }}</td>
-                                                <td>{% if quiz.published %}{{ quiz.date_published }}
+                                                <td>{{ quiz.date_published }}{% if quiz.published %}{{ quiz.date_published }}
                                                 {% else %}
                                                     <button class="btn btn-primary"
                                                             id="submitBtn"
