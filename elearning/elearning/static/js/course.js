@@ -1,10 +1,8 @@
 jQuery(function ($) {
-    var id;
+    var url = "";
     $("#saveCourseChanges").click(function (e) {
         $(e.target).attr("data-dismiss", "modal");
         var inputText = $("#formInputModal").val();
-        console.log(url);
-        console.log(inputText);
 
         var token = $('input[name="csrfmiddlewaretoken"]').prop('value');
         jQuery.ajax({
@@ -15,7 +13,7 @@ jQuery(function ($) {
         });
     });
 
-    $("#submitBtn").click(function (e) {
+    $(".submitBtn").click(function (e) {
         url = $(e.target).val();
-    })
+    });
 });
