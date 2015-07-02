@@ -47,20 +47,28 @@
                                         </thead>
                                         <tbody>
                                         {% for quiz in quizzes %}
-                                            {% csrf_token %}
-                                            <tr {% if quiz.date_published %} class="success"
-                                                                        {% else %}class="warning"{% endif %}>
-                                                <td>{{ quiz.title }}</td>
-                                                <td>{{ quiz.description }}</td>
-                                                <td>{{ quiz.date_published }}{% if quiz.published %}{{ quiz.date_published }}
-                                                {% else %}
-                                                    <button class="btn btn-primary submitBtn"
-                                                            data-toggle="modal" data-target="#confirm-submit"
-                                                            value="{% url "publish_quiz" course.id quiz.id %}">Publish
-                                                    </button>
-                                                {% endif %}
-                                                </td>
-                                            </tr>
+                                                {% csrf_token %}
+                                                <tr id="{{quiz.id}}"{% if quiz.date_published %} class="success"
+                                                                            {% else %}class="warning"{% endif %}>
+                                                    <td>{{ quiz.title }}</td>
+                                                    <td>{{ quiz.description }}</td>
+                                                    <td>
+                                                        {% if quiz.date_published %}
+                                                            {% for date in dates %}
+                                                                {% if date.id == quiz.id %}
+                                                                    {{ date.datetime}}
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        {% else %}
+                                                        <button id="button{{quiz.id}}"class="btn btn-primary submitBtn"
+                                                                data-toggle="modal" data-target="#confirm-submit"
+                                                                value="{% url "publish_quiz" course.id quiz.id %}">Publish
+                                                        </button>
+                                                         <div id ="okstatus{{quiz.id}}" style="display: none; color: green">Published</div>
+                                                         <div id ="failstatus{{quiz.id}}" style="display: none; color: red">Not published</div>
+                                                        {% endif %}
+                                                    </td>
+                                                </tr>
                                         {% endfor %}
                                         </tbody>
                                     </table>
