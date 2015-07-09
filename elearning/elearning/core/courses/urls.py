@@ -13,6 +13,6 @@ urlpatterns = patterns('',
     url(r'^courses/(?P<course_id>\w+)/quizzes/add/$',
         user_login_required(add_quiz), name='add_quiz'),
     url(r'^courses/(?P<course_id>\w+)/quizzes/(?P<quiz_id>\w+)/publish/$',
-        user_login_required(publish_quiz), name='publish_quiz'),
+        publish_quiz, name='publish_quiz'),
 
 )

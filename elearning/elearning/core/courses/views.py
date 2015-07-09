@@ -122,6 +122,7 @@ def add_quiz(request, course_id):
     return render(request, 'courses/add_quiz.html')
 
 def publish_quiz(request, course_id, quiz_id):
+    print "insight"
     email = request.session['email']
     password = request.session['password']
     url ='/quizzes/{0}/publish'.format(quiz_id)
@@ -132,5 +133,7 @@ def publish_quiz(request, course_id, quiz_id):
             json_data = json.dumps({"response":"ok","quiz_id":quiz_id})
         else:
             json_data = json.dumps({"response":"failed","quiz_id":quiz_id})
-    return HttpResponse(json_data, mimetype = "application/json")
+    r = HttpResponse(json_data, content_type = "application/json")
+    print "insight2"
+    return r
 

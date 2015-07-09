@@ -10,17 +10,19 @@ jQuery(function ($) {
             url: url,
             data: {'csrfmiddlewaretoken': token, 'text': inputText},
             dataType: 'json',
-            contentType: "application/json; charset=utf-8",
             success: function(response) {
+                var element;
                 if (response["response"]=="ok"){
-                    status = $("#okstatus"+response["quiz_id"]);
+                    element = $("#okstatus" + response["quiz_id"]);
                 }
                 else {
-                    status = $("#failstatus"+response["quiz_id"]);
+                    element = $("#failstatus" + response["quiz_id"]);
                 }
-                if (status.css('display') == "none"){
-                    status.css('display','block');
+                if (element.css('display') == "none"){
+                    element.css('display','block');
                 }
+                var button = $("#button" + response["quiz_id"]);
+                button.hide();
             }
         });
     });
