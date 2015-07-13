@@ -43,6 +43,7 @@
                                             <th>Title</th>
                                             <th>Description</th>
                                             <th>Published</th>
+                                            <th>Close date</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -50,7 +51,8 @@
                                                 {% csrf_token %}
                                                 <tr id="{{quiz.id}}"{% if quiz.date_published %} class="success"
                                                                             {% else %}class="warning"{% endif %}>
-                                                    <td>{{ quiz.title }}</td>
+                                                    <td><a style="font-weight:normal" href="{% url "quiz_page"  course.id quiz.id%}">
+                                                        {{ quiz.title }}</a></td>
                                                     <td>{{ quiz.description }}</td>
                                                     <td>
                                                         {% if quiz.date_published %}
@@ -66,6 +68,26 @@
                                                         </button>
                                                          <div id ="okstatus{{quiz.id}}" style="display: none; color: green">Published</div>
                                                          <div id ="failstatus{{quiz.id}}" style="display: none; color: red">Not published</div>
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        {% if quiz.date_closed %}
+                                                            {% for date in dates %}
+                                                                {% if date.id == quiz.id %}
+                                                                    {{ date.closedate}}
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        {% else %}
+                                                            {% if quiz.date_published %}
+                                                                <button id="closebutton{{quiz.id}}"class="btn btn-primary closeBtn"
+                                                                        data-toggle="modal" data-target="#confirm-close"
+                                                                        value="{% url "close_quiz" course.id quiz.id %}">Close quiz
+                                                                </button>
+                                                                 <div id ="closeokstatus{{quiz.id}}" style="display: none; color: green">Closed</div>
+                                                                 <div id ="closefailstatus{{quiz.id}}" style="display: none; color: red">Not closed</div>
+                                                            {% else %}
+                                                                Not published yet
+                                                            {% endif %}
                                                         {% endif %}
                                                     </td>
                                                 </tr>
@@ -102,6 +124,26 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" id="saveCourseChanges">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="confirm-close" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Close quiz</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="form-control" name="text" id="formInputModal"/>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="closeQuiz">Save changes</button>
                 </div>
             </div>
         </div>

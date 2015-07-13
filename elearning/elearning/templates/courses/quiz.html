@@ -1,0 +1,29 @@
+{% extends "main/base.html" %}
+
+{% block title %}
+    Quiz Statistics
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="page-header">
+                <div class="clearfix">
+                    <div class="col-md-12">
+                        <h2>{{ title }}</h2>
+                        <p> Total participants: {{ total_participants }} </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <figure style="width: 80%">
+            <embed src="{% url "quiz_statistics" quiz_id %}" />
+        </figure>
+        <figure style="width: 80%">
+            <embed src="{% url "questions_statistics" quiz_id %}" />
+        </figure>
+        <figure style="width: 80%">
+            <embed src="{% url "motivation_statistics" quiz_id %}" />
+        </figure>
+    </div>
+{% endblock %}

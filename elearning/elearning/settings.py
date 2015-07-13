@@ -126,3 +126,7 @@ TEMPLATE_DIRS = (
 SERVER_URL = 'http://e-cognita.herokuapp.com/'
 REST_API = SERVER_URL + 'api'
 
+PROJECT_ROOT = path.abspath(path.dirname(__file__))
+
+PYGAL_JS_FILES=[path.join(PROJECT_ROOT, 'static', 'js', 'svg.jquery.js'),
+                path.join(PROJECT_ROOT, 'static', 'js', 'pygal-tooltips.js'), ]

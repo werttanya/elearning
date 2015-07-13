@@ -569,3 +569,13 @@ header p {
 td, th {
     padding: 5px;
 }
+
+figure {
+    display: block;
+    margin: 0;
+    padding: 0;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+}
