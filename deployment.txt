@@ -1,0 +1,22 @@
+Clone the repository:
+
+$ git clone git://github.com/werttanya/elearning.git
+
+Install and activate the virtualenv:
+
+$ cd <code-project-dir>
+$ virtualenv env
+$ source env/bin/activate
+
+Install all the dependencies from your terminal:
+
+$ pip install -r requirements.txt
+
+Now let's synchronize the database now:
+
+$ python manage.py syncdb
+
+And simply run the Web Portal:
+
+$ python manage.py runserver
+
