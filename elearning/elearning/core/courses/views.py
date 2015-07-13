@@ -235,8 +235,10 @@ def quiz_statistics(request, quiz_id):
             Y.append(0.01)
         X.append(pair['score']*100)
     ed_chart = pygal.StackedBar(legend_at_bottom=True, title_font_size=10, legend_font_size=10,
-                                style=custom_style, width=600, height=300,
+                                style=custom_style, width=600, height=300, order_min = 0,
                                 js= PYGAL_JS_FILES)
+    if grade_distribution['total_participants'] == 0:
+        Y=[]
     ed_chart.title = "General progress of students"
     ed_chart.add('Number of students', Y)
     ed_chart.x_labels = [u"{0}%".format(x) for x in X]
@@ -258,8 +260,7 @@ def questions_statistics(request, quiz_id):
     wrong_answers_count = []
     not_answered_count = []
     num_question = 0
-    #X = xrange(1,15)
-    #Y = [x*10%6 for x in xrange(1,15)]
+
     for question in answers_distribution['answers_distribution']:
         if question['correct_answers_count'] == 0:
             correct_answers_count.append(0.01)
@@ -278,7 +279,10 @@ def questions_statistics(request, quiz_id):
     ed_chart = pygal.Bar(legend_at_bottom=True, title_font_size=10, legend_font_size=10,
                                 style=question_style, width=600, height=300, order_min = 0, show_x_guides =True,
                                 js= PYGAL_JS_FILES)
-    pygal.print_zeros = True
+    if total_submissions == 0:
+        correct_answers_count = []
+        wrong_answers_count = []
+        not_answered_count = []
     ed_chart.title = "Per question results"
     X = xrange(1,num_question+1)
     ed_chart.x_labels = [u"Q.{0}".format(x) for x in X]
@@ -318,8 +322,8 @@ def motivation_statistics(request, quiz_id):
                                 style=motivation_style, width=600, height=300,
                                 js= PYGAL_JS_FILES)
     pie_chart.title = 'Motivation (in %)'
-    pie_chart.add('1< day <3', middle)
     pie_chart.add('< 1 day', short)
+    pie_chart.add('1< day <3', middle)
     pie_chart.add('In the last day', long)
 
     temp = tempfile.NamedTemporaryFile('rw')

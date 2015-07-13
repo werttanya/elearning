@@ -29,13 +29,13 @@
                                 <div class="tab-content padding-15">
                                     <div class="tab-pane active" id="quiz-statistics">
                                         <p> Total participants: {{ total_participants }} </p>
-                                        <figure style="width: 80%">
+                                        <figure style="width: 90%">
                                             <embed src="{% url "quiz_statistics" quiz_id %}" />
                                         </figure>
-                                        <figure style="width: 80%">
+                                        <figure style="width: 90%">
                                             <embed src="{% url "questions_statistics" quiz_id %}" />
                                         </figure>
-                                        <figure style="width: 80%">
+                                        <figure style="width: 90%">
                                             <embed src="{% url "motivation_statistics" quiz_id %}" />
                                         </figure>
                                     </div>
