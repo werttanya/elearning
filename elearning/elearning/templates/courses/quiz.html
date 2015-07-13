@@ -11,19 +11,55 @@
                 <div class="clearfix">
                     <div class="col-md-12">
                         <h2>{{ title }}</h2>
-                        <p> Total participants: {{ total_participants }} </p>
+
+                                <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="statistics-navs">
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs">
+                                    <li class="active">
+                                        <a href="#quiz-statistics" data-toggle="tab">Statistics</a>
+                                    </li>
+                                    <li class="">
+                                        <a href="#questions" data-toggle="tab">Questions</a>
+                                    </li>
+                                </ul>
+
+                                <!-- Tab panes -->
+                                <div class="tab-content padding-15">
+                                    <div class="tab-pane active" id="quiz-statistics">
+                                        <p> Total participants: {{ total_participants }} </p>
+                                        <figure style="width: 80%">
+                                            <embed src="{% url "quiz_statistics" quiz_id %}" />
+                                        </figure>
+                                        <figure style="width: 80%">
+                                            <embed src="{% url "questions_statistics" quiz_id %}" />
+                                        </figure>
+                                        <figure style="width: 80%">
+                                            <embed src="{% url "motivation_statistics" quiz_id %}" />
+                                        </figure>
+                                    </div>
+                                    <div class="tab-pane" id="questions">
+                                        <ul>
+                                        {% for question in questions %}
+                                            <li>
+                                                <b>{{ question.question }}</b>
+                                                <ul>
+                                                    {% for choice in question.choices %}
+                                                        <li>{{choice}}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </li>
+                                        {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
-        <figure style="width: 80%">
-            <embed src="{% url "quiz_statistics" quiz_id %}" />
-        </figure>
-        <figure style="width: 80%">
-            <embed src="{% url "questions_statistics" quiz_id %}" />
-        </figure>
-        <figure style="width: 80%">
-            <embed src="{% url "motivation_statistics" quiz_id %}" />
-        </figure>
     </div>
 {% endblock %}
